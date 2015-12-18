@@ -1,0 +1,30 @@
+<?php $this->headTitle('Feedback') ?>
+<div class="feedback-content">
+    
+
+    <h1><?php echo $this->translate($title)?></h1>
+    <div class="feedback-descripton"><?php echo $this->translate($description)?></div>
+
+<?php if($display_flash_messages):
+//    var_dump((array)$_SESSION['FlashMessenger']);
+    $flash = $this->flashMessenger();
+    $flash->setMessageOpenFormat('<div%s>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times;
+        </button>
+        <ul><li>')
+        ->setMessageSeparatorString('</li><li>')
+        ->setMessageCloseString('</li></ul></div>');
+
+//    echo $flash->render('feedback_error');
+        
+    echo $flash->renderCurrent('feedback_error', array('alert', 'alert-dismissible', 'alert-danger'));
+    echo $flash->render('feedback_success', array('alert', 'alert-dismissible', 'alert-success'));
+?>
+
+
+<?php endif?>
+    <div class="feedback-form">
+        <?php echo $this->form($form);?>
+    </div>
+</div>

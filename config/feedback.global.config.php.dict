@@ -1,0 +1,7 @@
+<?php
+
+return array(
+    'feedback' => array(
+        'support_address' => 'support@phdav.net'
+    )
+);

@@ -1,0 +1,22 @@
+{
+    "name": "eugenzor/feedback",
+    "description": "Simple feedback form with bootstrap3 support",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
+    "keywords": [
+        "zend",
+        "framework",
+        "module",
+        "zf2",
+        "feedback"
+    ],
+    "require": {
+        "php": ">=5.5",
+        "zendframework/zendframework": "~2@stable",
+        "zendframework/zftool": "dev-master",
+        "neilime/zf2-twb-bundle": "2.*@stable"
+    },
+    "require-sugest": {
+        "zf-commons/zfc-user": "2.*@dev"
+    }
+}

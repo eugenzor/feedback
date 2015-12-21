@@ -1,6 +1,6 @@
 {
     "name": "eugenzor/feedback",
-    "description": "Simple feedback form with bootstrap3 support",
+    "description": "Simple feedback module with bootstrap3 support for Zend Framework 2",
     "license": "BSD-3-Clause",
     "minimum-stability": "dev",
     "keywords": [

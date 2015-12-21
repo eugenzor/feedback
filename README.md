@@ -1,6 +1,7 @@
 # feedback
 Simple feedback module for zf2 with bootstrap3. It is integrated with zfcUser
 auth module.
+![Module interface](https://raw.githubusercontent.com/eugenzor/feedback/master/docs/images/interface.png)
 
 # Install
 * Add into you composer.json:
@@ -18,12 +19,16 @@ php composer.phar update
 return array(
     'modules' => array(
 // .... some other modules
-        'Feedback',
-        'TwbBundle'
+        'Feedback',   // <-------- Add
+        'TwbBundle'   // <-------- this
     ),
 // .... some other config
 );
 
 ```
-
-# Configuring
+* copy module/Feedback/config/feedback.global.config.php.dict to the config/autoload/feedback.global.config.php
+```bach
+copy module/Feedback/config/feedback.global.config.php.dict config/autoload/feedback.global.config.php
+```
+* modify config/autoload/feedback.global.config.php and put your support email into the 
+* run http[s]://{your_project_root}/feedback

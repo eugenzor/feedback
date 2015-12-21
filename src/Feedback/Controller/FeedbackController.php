@@ -61,6 +61,18 @@ class FeedbackController extends AbstractActionController
                 );
 
             }
+        }else{
+            try{
+                //if we are using zfcuser
+                $auth = $this->zfcUserAuthentication();
+                if ($auth){
+                    $user = $auth->getIdentity();
+                    $form->get('name')->setValue($user->getDisplayName());
+                    $form->get('email')->setValue($user->getEmail());                    
+                }
+
+            } catch (\Exception $ex) {
+            }
         }
         
         return array(

@@ -16,7 +16,15 @@
         "zendframework/zftool": "dev-master",
         "neilime/zf2-twb-bundle": "2.*@stable"
     },
-    "require-sugest": {
+    "suggest": {
         "zf-commons/zfc-user": "2.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Feedback": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
     }
 }

@@ -27,15 +27,15 @@ return array(
 );
 
 ```
-* copy module/Feedback/config/feedback.global.config.php.dict to the config/autoload/feedback.global.config.php
+* copy module/Feedback/config/feedback.global.php.dict to the config/autoload/feedback.global.php
 ```bach
-copy module/Feedback/config/feedback.global.config.php.dict config/autoload/feedback.global.config.php
+copy module/Feedback/config/feedback.global.php.dict config/autoload/feedback.global.php
 ```
-* modify config/autoload/feedback.global.config.php and put your support email there
+* modify config/autoload/feedback.global.php and put your support email there
 * run http[s]://{your_project_root}/feedback
 
 # Configuration
-It is also possible to configurate feedback form by changing default params. You can rewrite any of them in your config/feedback.global.config.php:
+It is also possible to configurate feedback form by changing default params. You can rewrite any of them in your config/feedback.global.php:
 ```php
 return array(
     'feedback' => array(

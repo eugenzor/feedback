@@ -27,13 +27,21 @@ class FeedbackController extends AbstractActionController
     
     public function indexAction()
     {
-        $config = $this->getServiceLocator()->get('config');
-        $translator = $this->getServiceLocator()->get('translator');
+        $services = $this->getServiceLocator();
+        
+        $config = $services->get('config');
+        $translator = $services->get('translator');
         
         $namespaces = $this->getFlashMessengerNamespaces();
         
+        $user = $this->getAuthInfo();
+        
         $formFactory = new FormFactory();
-        $form = $formFactory->createForm($config['feedback']['message_form']);
+        $formConfig = $config['feedback']['message_form'];
+        if ($user){
+            unset($formConfig['elements']['captcha']);
+        }
+        $form = $formFactory->createForm($formConfig);
         
         if ($this->getRequest()->isPost()){
             $form->setData($this->params()->fromPost());
@@ -49,11 +57,11 @@ class FeedbackController extends AbstractActionController
                 $transport = new Mail\Transport\Sendmail();
                 $transport->send($mail);
                 
-                $this->flashMessenger()->addMessage(
+                $this->flashMessenger()->addSuccessMessage(
                     $translator->translate('Message was successfully sent. Thanks for feedback'),
                     $namespaces['success']
                 );
-                $this->redirect()->toRoute('feedback');
+                return $this->redirect()->toRoute('feedback');
             }else{
                 $this->flashMessenger()->addMessage(
                         $translator->translate('Form has errors. Check it'),
@@ -62,18 +70,9 @@ class FeedbackController extends AbstractActionController
 
             }
         }else{
-            try{
-                //if we are using zfcuser
-                $auth = $this->zfcUserAuthentication();
-                if ($auth){
-                    $user = $auth->getIdentity();
-                    if ($user){
-                        $form->get('name')->setValue($user->getDisplayName());
-                        $form->get('email')->setValue($user->getEmail());           
-                    }
-                }
-
-            } catch (\Exception $ex) {
+            if ($user){
+                $form->get('name')->setValue($user->getDisplayName());
+                $form->get('email')->setValue($user->getEmail());           
             }
         }
         
@@ -86,5 +85,24 @@ class FeedbackController extends AbstractActionController
     }
 
 
+    protected function getAuthInfo()
+    {
+        try{
+            //if we are using zfcuser
+            $auth = $this->zfcUserAuthentication();
+            if ($auth){
+                $user = $auth->getIdentity();
+                if ($user){
+                    return $user;
+                    $form->get('name')->setValue($user->getDisplayName());
+                    $form->get('email')->setValue($user->getEmail());           
+                }
+            }
+
+        } catch (\Exception $ex) {
+        }
+        return false;
+    }
+    
 }
 

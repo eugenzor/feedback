@@ -2,7 +2,7 @@
 
 return array(
     'elements' => array(
-        array(
+        'name' => array(
             'spec' => array(
                 'name' => 'name',
                 'type' => 'Text',
@@ -12,34 +12,34 @@ return array(
             )
         ),
         
-        array(
+        'email' => array(
             'spec' => array(
                 'name' => 'email',
                 'type' => 'Email',
                 'options' => array(
-                    'label' => 'Your email'
+                    'label' => 'Email'
                 )
             )
         ),
         
-        array(
+        'message' => array(
             'spec' => array(
                 'name' => 'message',
                 'type' => 'Textarea',
                 'options' => array(
-                    'label' => 'Mesage'
+                    'label' => 'Message'
                 )
             )
         ),
         
-        array(
+        'csrf' => array(
             'spec' => array(
                 'type' => 'Zend\Form\Element\Csrf',
                 'name' => 'security',
             ),
         ),
         
-        array(
+        'captcha' => array(
             'spec' => array(
                 'type' => 'Captcha',
                 'name' => 'captcha',
@@ -54,7 +54,7 @@ return array(
             ),
         ),
         
-        array(
+        'send' => array(
             'spec' => array(
                 'name' => 'send',
                 'type'  => 'Submit',

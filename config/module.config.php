@@ -1,6 +1,5 @@
 <?php
 return array(
-    
     'feedback' => array(
         'message_form' => include __DIR__ . '/message.form.config.php',
         'title' => 'Feedback',

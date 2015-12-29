@@ -4,7 +4,7 @@ namespace Feedback\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Factory as FormFactory;
-use Zend\Mail;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class FeedbackController extends AbstractActionController
 {
@@ -47,21 +47,20 @@ class FeedbackController extends AbstractActionController
             $form->setData($this->params()->fromPost());
             if ($form->isValid()){
                 $data = $form->getData();
-                $mail = new Mail\Message();
-                $mail->setBody($data['message']);
-                $mail->setFrom($data['email'], $data['name']);
-                $mail->addTo($config['feedback']['support_address']);
-                $subject = $translator->translate($config['feedback']['message_subject']);
-                $subject = str_replace('%name%', $data['name'], $subject);
-                $mail->setSubject($subject);
-                $transport = new Mail\Transport\Sendmail();
-                $transport->send($mail);
                 
+                $mail = new PHPMailer;
+                $mail->setFrom($data['email'], $data['name']);
+                $mail->addAddress($config['feedback']['support_address']);
+                $subject = $translator->translate($config['feedback']['message_subject']);
+                $mail->Subject = str_replace('%name%', $data['name'], $subject);
+                $mail->Body = $data['message'];
+                $mail->send();
+                
+               
                 $this->flashMessenger()->addSuccessMessage(
-                    $translator->translate('Message was successfully sent. Thanks for feedback'),
-                    $namespaces['success']
+                    $translator->translate('Message was successfully sent. Thanks for feedback')
                 );
-                return $this->redirect()->toRoute('feedback');
+                return $this->redirect()->refresh();
             }else{
                 $this->flashMessenger()->addMessage(
                         $translator->translate('Form has errors. Check it'),

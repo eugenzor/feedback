@@ -14,7 +14,8 @@
         "php": ">=5.5",
         "zendframework/zendframework": "~2@stable",
         "zendframework/zftool": "dev-master",
-        "neilime/zf2-twb-bundle": "2.*@stable"
+        "neilime/zf2-twb-bundle": "2.*@stable",
+        "phpmailer/phpmailer": "~5.2"
     },
     "suggest": {
         "zf-commons/zfc-user": "2.*@dev"

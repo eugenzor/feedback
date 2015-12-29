@@ -49,7 +49,8 @@ class FeedbackController extends AbstractActionController
                 $data = $form->getData();
                 
                 $mail = new PHPMailer;
-                $mail->setFrom($data['email'], $data['name']);
+                $mail->setFrom($config['feedback']['support_address']);
+                $mail->addReplyTo($data['email'], $data['name']);
                 $mail->addAddress($config['feedback']['support_address']);
                 $subject = $translator->translate($config['feedback']['message_subject']);
                 $mail->Subject = str_replace('%name%', $data['name'], $subject);
